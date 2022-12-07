@@ -3,4 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def root(request):
-  return HttpResponse('Hello Django')
+  params = {}
+  params['title'] = 'ただのタイトル'
+  #return HttpResponse('Hello Django')
+  return render(request, 'be4/index.html', params)
