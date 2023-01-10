@@ -1,26 +1,79 @@
-<html lang="ja"><head><meta charset="utf-8"></head>
-  <body>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body id="padding">
     <h1>おすすめグルメ</h1>
 
     {% if user.is_authenticated %}
-    <p>こんにちわ！ {{ user.username }}!</p>
-    <a href="{% url 'logout' %}">logout</a>
+    <p id="right">{{ user.username }}でログイン中</p>
+    <p id="right"><a href="{% url 'logout' %}">ログアウトする</a></p>
     {% else %}
-    <p>詳しく見たい方は以下をクリックしてログインしてください。</p>
-    <p><a href="{% url 'login' %}">login</a></p>
+    <!--<p id="right">詳しく見たい方は以下をクリックしてログインしてください。</p>-->
+    <p id="right"><a href="{% url 'login' %}">ログイン</a></p>
     {% endif %}
 
     <hr>
-    <div>おすすめグルメ1</div>
+    <h2>やきとん地酒小太郎</h2>
+    <div>
+      <img src="../img/yakiton1.jpg" alt="やきとんの画像1" class="img1" width="200px" height="200px">
+      <img src="../img/yakiton3.jpg" alt="やきとんの画像2" class="img1" width="200px" height="200px">
+    </div>
+      <p>日本料理店</p>
+      <p>丸ノ内線【南阿佐ヶ谷】徒歩1分 JR【阿佐ヶ谷】徒歩6分</p>
+      <p>平日16時〜23時/土日祝15時〜22時営業</p>
+      <p>月曜定休</p>
+      <p>杉並区成田東5-42-10</p>
+      <p>03-4285-1010ご予約はお電話のみ</p>
     <p><a href="{% url 'priv1' %}">詳しくはここをクリック</a></p>
 
     <hr>
-    <div>おすすめグルメ2</div>
+    <h2>おすすめグルメ2</h2>
     <p><a href="{% url 'priv2' %}">詳しくはここをクリック</a></p>
     
     <hr>
-    <div>おすすめグルメ3</div>
+    <h2>おすすめグルメ3</h2>
     <p><a href="{% url 'priv3' %}">詳しくはここをクリック</a></p>
 
+    <footer>
+      <p>© All rights reserved by be4.</p>
+    </footer>
+
+    <style>
+    p {
+    font-weight: 700;
+    }
+
+    body{
+    background-image:url("../img/haikei.png");
+    background-size: contain;
+    margin: 0;   /*←marginを０にすることで、メニューにできる空白をなくせる*/
+
+    border-right: 8px solid #f87a9e;
+    border-left: 8px solid #f87a9e;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #right {
+      text-align: right;
+    }
+
+    #padding {
+      padding-top: 50px;
+      padding-left: 150px;
+      padding-right: 150px;
+    }
+
+    footer {
+    width: 100%;
+    height: 40px; 
+    text-align: center;
+    padding: 50px 0;
+    background-color: dimgray;
+  }
+    </style>
 </body>
 </html>
