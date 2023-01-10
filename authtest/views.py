@@ -19,3 +19,15 @@ def private_page3(request):
 
 def public_page(request):
     return render(request, 'authtest/public.html', {})
+
+def index_1(request):
+    return render(request, 'authtest/home.html')
+
+def index_2(request):
+    return render(request, 'authtest/private1.html')
+
+def index_3(request):
+    return render(request, 'authtest/private2.html')
+
+def index_4(request):
+    return render(request, 'authtest/private3.html')
