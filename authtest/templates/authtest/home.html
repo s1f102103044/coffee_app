@@ -1,7 +1,9 @@
+{% load static %}
 <html lang="ja">
   <head>
     <meta charset="utf-8">
   </head>
+
   <body id="padding">
     <h1>おすすめグルメ</h1>
 
@@ -16,8 +18,8 @@
     <hr>
     <h2>やきとん地酒小太郎</h2>
     <div>
-      <img src="../img/yakiton1.jpg" alt="やきとんの画像1" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton3.jpg" alt="やきとんの画像2" class="img1" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton1.jpg' %}" alt="やきとんの画像1" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton3.jpg' %}" alt="やきとんの画像3" width="200px" height="200px">
     </div>
       <p>日本料理店</p>
       <p>丸ノ内線【南阿佐ヶ谷】徒歩1分 JR【阿佐ヶ谷】徒歩6分</p>
@@ -64,7 +66,7 @@
     }
 
     body{
-    background-image:url("../img/haikei.png");
+    background-image:url("../img/haikei.jpg");
     background-size: contain;
     margin: 0;   /*←marginを０にすることで、メニューにできる空白をなくせる*/
 

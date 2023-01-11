@@ -1,4 +1,10 @@
-<html lang="ja"><head><meta charset="utf-8"></head>
+{% load static %}
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+  </head>
+
   <body id="padding">
 
     <nav>
@@ -44,14 +50,15 @@
     <hr>
 
     <h1>写真</h1>
-      <img src="../img/yakiton4.png" alt="やきとんの画像4" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton5.jpg" alt="やきとんの画像5" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton6.jpg" alt="やきとんの画像6" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton7.jpg" alt="やきとんの画像7" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton8.jpg" alt="やきとんの画像8" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton9.jpg" alt="やきとんの画像9" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton10.jpg" alt="やきとんの画像10" class="img1" width="200px" height="200px">
-      <img src="../img/yakiton11.jpg" alt="やきとんの画像11" class="img1" width="200px" height="200px">
+    
+      <img src="{% static 'authtest/img/yakiton4.jpg' %}" alt="やきとんの画像4" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton5.jpg' %}" alt="やきとんの画像5" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton6.jpg' %}" alt="やきとんの画像6" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton7.jpg' %}" alt="やきとんの画像7" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton8.jpg' %}" alt="やきとんの画像8" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton9.jpg' %}" alt="やきとんの画像9" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton10.jpg' %}" alt="やきとんの画像10" width="200px" height="200px">
+      <img src="{% static 'authtest/img/yakiton11.jpg' %}" alt="やきとんの画像11" width="200px" height="200px">
 
     <footer>
       <p>© All rights reserved by be4.</p>
@@ -63,7 +70,8 @@
   }
 
   body{
-    background-image:url("../img/haikei.png");
+    background: white url("img/haikei.jpg") no-repeat;
+    background-image:url("../img/haikei.jpg");
     background-size: contain;
     margin: 0;   /*←marginを０にすることで、メニューにできる空白をなくせる*/
 
