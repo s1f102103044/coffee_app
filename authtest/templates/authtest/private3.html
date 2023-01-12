@@ -1,11 +1,17 @@
-<html lang="ja"><head><meta charset="utf-8"></head>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>ホームページです</title>
+    <meta charset="utf-8">
+  </head>
   <body id="padding">
 
     <nav>
       <ul class="gnavi">
         <li class="current"><a href='{% url "home" %}'>HOME</a></li>
         <li><a href='{% url "private1" %}'>やきとん地酒小太郎</a></li>
-        <li><a href='{% url "private2" %}'>てつ</a></li>
+        <li><a href='{% url "private2" %}'>つけめん102</a></li>
       </ul>
     </nav>
 
@@ -18,8 +24,8 @@
     <h1>メニュー</h1>
     <p>ほぼ全品￥300~400 しかも種類は250種類も！(ラーメンや餃子、から揚げなど)</p>
     
-    <img src="../img/mariyasu3.jpg" class="img1" width="200px" height="200px">
-    <img src="../img/maruyasu4.png" class="img1" width="200px" height="200px">
+    <img src="{% static 'authtest/img/mariyasu3.jpg' %}" class="img1" width="200px" height="200px">
+    <img src="{% static 'authtest/img/maruyasu4.png' %}" class="img1" width="200px" height="200px">
     <p>なんといっても魅力的なのがこの250種類と飲み物が2時間食べ飲み放題で￥2,980なところです！！</p>
     <footer>
       <p>© All rights reserved by be4.</p>

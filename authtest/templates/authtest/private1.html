@@ -1,17 +1,20 @@
+<!DOCTYPE html>
 {% load static %}
 
 <html lang="ja">
   <head>
     <meta charset="utf-8">
+    <title>ホームページです</title>
+    <link rel="stylesheet" href="{% static 'authtest/img/yakiton.css' %}">
   </head>
 
   <body id="padding">
 
     <nav>
       <ul class="gnavi">
-        <li class="current"><a href='{% url "home" %}'>HOME</a></li>
-        <li><a href='{% url "private2" %}'>private2</a></li>
-        <li><a href='{% url "private3" %}'>private3</a></li>
+        <li class="current"><a href="{% url 'home' %}">HOME</a></li>
+        <li><a href="{% url 'private2' %}">つけめん102</a></li>
+        <li><a href="{% url 'private3' %}">マルヤス酒場</a></li>
       </ul>
     </nav>
 
@@ -50,7 +53,7 @@
     <hr>
 
     <h1>写真</h1>
-    
+
       <img src="{% static 'authtest/img/yakiton4.jpg' %}" alt="やきとんの画像4" width="200px" height="200px">
       <img src="{% static 'authtest/img/yakiton5.jpg' %}" alt="やきとんの画像5" width="200px" height="200px">
       <img src="{% static 'authtest/img/yakiton6.jpg' %}" alt="やきとんの画像6" width="200px" height="200px">
