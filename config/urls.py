@@ -18,7 +18,7 @@ from django.urls import path, include
 import authtest.views
 
 urlpatterns = [
-    path('app01/', include('authtest.urls')),
+    path('', include('authtest.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]

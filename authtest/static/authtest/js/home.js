@@ -1,27 +1,45 @@
-// <戻るボタンの動作>
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('drawCanvas');
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+  let startX = 0;
+  let startY = 0;
+  let drawnPath = [];
 
-jQuery(function() {
-    var appear = false;
-    var pagetop = $('#page_top');
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 100) {  //50pxスクロールしたら
-        if (appear == false) {
-          appear = true;
-          pagetop.stop().animate({
-            'bottom': '50px' //下から50pxの位置に
-          }, 300); //0.3秒かけて現れる
-        }
-      } else {
-        if (appear) {
-          appear = false;
-          pagetop.stop().animate({
-            'bottom': '-50x' //下から-50pxの位置に
-          }, 300); //0.3秒かけて隠れる
-        }
-      }
-    });
-    pagetop.click(function () {
-      $('body, html').animate({ scrollTop: 0 }, 500); //0.5秒かけてトップへ戻る
-      return false;
-    });
+  canvas.addEventListener('mousedown', (e) => {
+      startX = e.offsetX;
+      startY = e.offsetY;
+      isDrawing = true;
+      drawnPath = [{x: startX, y: startY}];
   });
+
+  canvas.addEventListener('mousemove', (e) => {
+      if (isDrawing) {
+          const x = e.offsetX;
+          const y = e.offsetY;
+          drawnPath.push({x, y});
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.beginPath();
+          ctx.moveTo(startX, startY);
+          for (let point of drawnPath) {
+              ctx.lineTo(point.x, point.y);
+          }
+          ctx.stroke();
+      }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+      isDrawing = false;
+      if (isCircle(drawnPath)) {
+          window.location.href = 'your-target-url.html'; // 新しいページにリダイレクト
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // 描画をクリア
+  });
+
+  function isCircle(path) {
+      // ここに円を検出するロジックを実装
+      // 簡単な実装としては、描かれたパスの形状が円に近いかどうかを計算する
+      // 実際には、より複雑なアルゴリズムが必要になる場合がある
+      return false; // 仮の実装
+  }
+});
