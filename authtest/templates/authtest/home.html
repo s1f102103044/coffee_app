@@ -1,23 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <title>Coffee Search</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コーヒーブレンド選択</title>
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
 </head>
 <body>
-    <h1>Coffee Search</h1>
-    <form method="GET" action=".">
-        <input type="text" name="q" placeholder="Search for coffee..." value="{{ query }}">
-        <button type="submit">Search</button>
-    </form>
+    <div id="container">
+        <h1>コーヒーブレンド選択</h1>
+        <form id="flavor-form">
+            <div class="flavor-category">
+                <h2>シトラス系</h2>
+                <label><input type="checkbox" name="flavor" value="candied_citrus">キャンディードシトラス</label>
+                <label><input type="checkbox" name="flavor" value="sweet_citrus">スイートシトラス</label>
+                <label><input type="checkbox" name="flavor" value="grapefruit">グレープフルーツ</label>
+                <label><input type="checkbox" name="flavor" value="remon">レモン</label>
+                <label><input type="checkbox" name="flavor" value="orange">オレンジ</label>
+            </div>
+            <div class="flavor-category">
+                <h2>チョコレート系</h2>
+                <label><input type="checkbox" name="flavor" value="milk_chocolate">ミルクチョコレート</label>
+                <label><input type="checkbox" name="flavor" value="dark_chocolate">ダークチョコレート</label>
+                <label><input type="checkbox" name="flavor" value="chocolate">チョコレート</label>
+                <label><input type="checkbox" name="flavor" value="cocoa">ココア</label>
+            </div>
+            <div class="flavor-category">
+                <h2>スパイス系</h2>
+                <label><input type="checkbox" name="flavor" value="cinnamon">シナモン</label>
+                <label><input type="checkbox" name="flavor" value="spice">スパイス</label>
+                <label><input type="checkbox" name="flavor" value="herb">ハーブ</label>
+            </div>
+            <div class="flavor-category">
+              <h2>フルーツ系</h2>
+              <label><input type="checkbox" name="flavor" value="apple">リンゴ</label>
+              <label><input type="checkbox" name="flavor" value="blueberry">ブルーベリー</label>
+              <label><input type="checkbox" name="flavor" value="berry">ベリー類</label>
+              <label><input type="checkbox" name="flavor" value="raisin">レーズン</label>
+          </div>
+          <div class="flavor-category">
+            <h2>ナッツ系</h2>
+            <label><input type="checkbox" name="flavor" value="nuts">ナッツ</label>
+            <label><input type="checkbox" name="flavor" value="roasted_nuts">煎ったナッツ</label>
+            <label><input type="checkbox" name="flavor" value="pecan_nuts">ピーカンナッツ</label>
+          </div>
+          <div class="flavor-category">
+            <h2>その他</h2>
+            <label><input type="checkbox" name="flavor" value="roasted_veg">ローストした野菜</label>
+            <label><input type="checkbox" name="flavor" value="caramel">カラメル</label>
+            <label><input type="checkbox" name="flavor" value="cheese">チーズ</label>
+            <label><input type="checkbox" name="flavor" value="toffee">トフィー</label>
+            <label><input type="checkbox" name="flavor" value="better">バター</label>
+            <label><input type="checkbox" name="flavor" value="maple">メープル</label>
+            <label><input type="checkbox" name="flavor" value="oatmeal">オートミール</label>
+            <label><input type="checkbox" name="flavor" value="caramel2">キャラメル</label>
+            <label><input type="checkbox" name="flavor" value="currant">カラント(スグリ)</label>
+          </div>
+            <button type="submit">結果を見る</button>
+        </form>
+        <div id="result-container">
+          {% if top_coffees %}
+            <h2>結果</h2>
+            <ol>
+              {% for coffee_name, score in top_coffees %}
+                <li>{{ coffee_name }} - スコア: {{ score }}</li>
+                <img src="{{ coffee_images[coffee_name] }}" alt="{{ coffee_name }}">
+              {% endfor %}
+            </ol>
+          {% endif %}
+        </div>
 
-    {% if coffees %}
-        <ul>
-            {% for coffee in coffees %}
-                <li>{{ coffee.name }}</li>
+        <!-- デバッグ用に全コーヒーのスコアを表示する -->
+        {% if coffee_scores %}
+          <h3>デバッグ情報：各コーヒーのスコア</h3>
+          <ul>
+            {% for coffee_name, score in coffee_scores.items %}
+              <li>{{ coffee_name }}: {{ score }}</li>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No coffee found.</p>
-    {% endif %}
+          </ul>
+        {% endif %}
+    <script src="{% static 'js/home.js' %}"></script>
 </body>
 </html>
