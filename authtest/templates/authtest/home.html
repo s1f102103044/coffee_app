@@ -61,6 +61,7 @@
             <label><input type="checkbox" name="flavor" value="currant">カラント(スグリ)</label>
           </div>
             <button type="submit">結果を見る</button>
+            <button id="search-again">もう一度検索する</button>
         </form>
         <div id="result-container">
           {% if top_coffees %}
@@ -68,7 +69,9 @@
             <ol>
               {% for coffee_name, score in top_coffees %}
                 <li>{{ coffee_name }} - スコア: {{ score }}</li>
-                <img src="{{ coffee_images|get_item:coffee_name }}" alt="{{ coffee_name }}">
+                <div class="img-container">
+                  <img src="{{ coffee_images|get_item:coffee_name }}" alt="{{ coffee_name }}">
+                </div>
               {% endfor %}
             </ol>
           {% endif %}

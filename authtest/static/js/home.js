@@ -13,41 +13,39 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       credentials: 'same-origin'
     })
-    .then(response => response.json())  // JSONレスポンスを期待
+    .then(response => response.json())
     .then(data => {
-      updateResults(data);  // 結果を更新する関数
+      updateResults(data);  // 結果を更新する関数を呼び出す
     }).catch(error => {
       console.error('Error:', error);
     });
   });
+
+  // 「もう一度検索する」ボタンの機能を実装
+  const searchAgainBtn = document.getElementById('search-again');
+  searchAgainBtn.addEventListener('click', function() {
+    document.getElementById('flavor-form').reset(); // フォームをリセット
+    document.getElementById('result-container').innerHTML = ''; // 結果表示エリアをクリア
+  });
 });
 
 function updateResults(data) {
-  // 結果を表示するためのコンテナを取得または作成
   let resultContainer = document.getElementById('result-container');
-  if (!resultContainer) {
-    resultContainer = document.createElement('div');
-    resultContainer.id = 'result-container';
-    document.body.appendChild(resultContainer);
+  resultContainer.innerHTML = ''; // 既存の内容をクリア
+
+  if (data.top_coffees.length > 0) {
+      data.top_coffees.forEach((coffee, index) => {
+          const ranking = index + 1; // 順位
+          const coffeeElement = document.createElement('div');
+          
+          // コーヒー名と画像を表示
+          coffeeElement.innerHTML = `<h3>第${ranking}位：${coffee.name}</h3>
+                                     <img src="${coffee.image}" alt="${coffee.name}" style="max-width:100%; height:auto;">`;
+          resultContainer.appendChild(coffeeElement);
+      });
+  } else {
+      // 一致するコーヒーがなかった場合のメッセージ
+      resultContainer.innerHTML = '<p>該当するコーヒーが見つかりませんでした。</p>';
   }
-  
-  // コンテナの内容を更新
-  resultContainer.innerHTML = '';  // 既存の内容をクリア
-  const topCoffees = data.top_coffees;
-  const coffeeImages = data.coffee_images;
-
-  // 各コーヒーの結果を表示
-  topCoffees.forEach(coffee => {
-    const coffeeName = coffee[0];
-    const score = coffee[1];
-    const imageUrl = coffeeImages[coffeeName];
-
-    // ここでDOM要素を作成してresultContainerに追加
-    const coffeeElement = document.createElement('div');
-    coffeeElement.innerHTML = `<h3>${coffeeName}</h3><p>スコア: ${score}</p><img src="${imageUrl}" alt="${coffeeName}">`;
-    resultContainer.appendChild(coffeeElement);
-  });
 }
-
-
 
