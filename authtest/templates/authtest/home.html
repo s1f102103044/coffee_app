@@ -1,4 +1,6 @@
+{% load custom_filters %}
 {% load static %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>コーヒーブレンド選択</title>
     <link href="{% static 'css/home.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
     <div id="container">
@@ -65,7 +68,7 @@
             <ol>
               {% for coffee_name, score in top_coffees %}
                 <li>{{ coffee_name }} - スコア: {{ score }}</li>
-                <img src="{{ coffee_images[coffee_name] }}" alt="{{ coffee_name }}">
+                <img src="{{ coffee_images|get_item:coffee_name }}" alt="{{ coffee_name }}">
               {% endfor %}
             </ol>
           {% endif %}

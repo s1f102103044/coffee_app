@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Coffee
+from django.http import JsonResponse
+from django.conf import settings
 
 def home(request):
     coffees = Coffee.objects.all()
@@ -35,22 +37,13 @@ def home(request):
             'カラント(スグリ)': request.POST.get('currant', False),
             'キャラメル': request.POST.get('caramel2', False),
         }
-        '''
+        selected_flavors = request.POST.getlist('flavor')
         # コーヒーのスコアを計算
         coffee_scores = {}
         for coffee in coffees:
-            score = 0
-            for flavor in selected_flavors:
-                if flavor in coffee.com:
-                    score += 1
+            score = sum(flavor in coffee.com.split(',') for flavor in selected_flavors)
             coffee_scores[coffee.co_name] = score
-        '''
-        selected_flavors = request.POST.getlist('flavor')  # 正しく複数の値を取得するためにgetlistを使用
-        # コーヒーのスコアを計算
-        coffee_scores = {}
-        for coffee in coffees:
-            score = sum(flavor in coffee.com for flavor in selected_flavors)
-            coffee_scores[coffee.co_name] = score
+
 
         # スコアが高い順にソート
         sorted_coffees = sorted(coffee_scores.items(), key=lambda x: x[1], reverse=True)
@@ -60,23 +53,23 @@ def home(request):
 
         # それぞれのコーヒーに対応する画像を取得
         coffee_images = {
-            'スターバックスライトノートブレンド': 'static/img/lnb.png',
-            'ブレックファーストブレンド'       : 'static/img/brk.png',
-            'サイレンブレンド'                : 'static/img/srn.png',
-            'ケニア'                         : 'static/img/ken.png',
-            'パイクプレイスロースト'           : 'static/img/edb.png',
-            'グアテマラアンティグア'           : 'static/img/gua.png',
-            'エチオピア'                      : 'static/img/bna.png',
-            'ハウスブレンド'                  : 'static/img/hou.png',
-            'ディカフェハウスブレンド'         : 'static/img/dho.png',
-            'コロンビア'                      : 'static/img/clg.png',
-            'トウキョウロースト'               : 'static/img/tyo.png',
-            'スマトラ'                        : 'static/img/sum.png',
-            'コモドドラゴンブレンド'           : 'static/img/kdr.png',
-            'カフェベロナ'                    : 'static/img/ver.png',
-            'エスプレッソロースト'             : 'static/img/esp.png',
-            'イタリアンロースト'               : 'static/img/ita.png',
-            'フレンチロースト'                 : 'static/img/fre.png',
+            'スターバックスライトノートブレンド': settings.STATIC_URL + 'img/lnb.png',
+            'ブレックファーストブレンド'       : settings.STATIC_URL + 'img/brk.png',
+            'サイレンブレンド'                : settings.STATIC_URL + 'img/srn.png',
+            'ケニア'                         : settings.STATIC_URL + 'img/ken.png',
+            'パイクプレイスロースト'           : settings.STATIC_URL + 'img/edb.png',
+            'グアテマラアンティグア'           : settings.STATIC_URL + 'img/gua.png',
+            'エチオピア'                      : settings.STATIC_URL + 'img/bna.png',
+            'ハウスブレンド'                  : settings.STATIC_URL + 'img/hou.png',
+            'ディカフェハウスブレンド'         : settings.STATIC_URL + 'img/dho.png',
+            'コロンビア'                      : settings.STATIC_URL + 'img/clg.png',
+            'トウキョウロースト'               : settings.STATIC_URL + 'img/tyo.png',
+            'スマトラ'                        : settings.STATIC_URL + 'img/sum.png',
+            'コモドドラゴンブレンド'           : settings.STATIC_URL + 'img/kdr.png',
+            'カフェベロナ'                    : settings.STATIC_URL + 'img/ver.png',
+            'エスプレッソロースト'             : settings.STATIC_URL + 'img/esp.png',
+            'イタリアンロースト'               : settings.STATIC_URL + 'img/ita.png',
+            'フレンチロースト'                 : settings.STATIC_URL + 'img/fre.png',
         }
         
         # コンテキストに追加
@@ -85,7 +78,11 @@ def home(request):
             'coffee_images': coffee_images,
             'coffee_scores': coffee_scores,
         }
-        return render(request, 'authtest/home.html', context)
+        #return render(request, 'authtest/home.html', context)
+        return JsonResponse({
+            'top_coffees': list(top_coffees),  # QuerySetをリストに変換
+            'coffee_images': coffee_images,
+        })
     else:
         # GETリクエストの場合は空のコンテキストを渡す
         return render(request, 'authtest/home.html', {})
@@ -109,4 +106,51 @@ home.htmlにて２つ目のＵＲＬのようなレイアウトで、「フー�
 それを私が実装し、動かしてフィードバックします。
 では、コードを書いてください。
 また、私のアイデアに改善案や強化した方がいい箇所がありましたら、言ってください。
+
+team-project-2022-be4
+    authtest
+        static
+            css
+                home.css
+            js
+                home.js
+        templates
+            authtest
+                home.html
+            img
+                1.png
+                2.png
+                3.png
+                4.png
+                5.png
+                6.png
+                7.png
+                8.png
+                9.png
+                10.png
+                11.png
+                12.png
+                13.png
+                14.png
+                15.png
+                16.png
+                17.png
+        templatetags
+            __init__.py
+            custom_filters.py
+        admin.py
+        apps.py
+        forms.py
+        models.py
+        test.py
+        urls.py
+       views.py
+    config
+        asgi.py
+        setting.py
+        urls.py
+        wsgi.py
+    COFFEE.csv
+    import_data.py
+    manage.py
 '''
