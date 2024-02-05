@@ -6,7 +6,42 @@ from django.conf import settings
 def home(request):
     coffees = Coffee.objects.all()
     if request.method == 'POST':
+        selected_flavors = request.POST.getlist('flavor')  # チェックボックスの値をリストで取得
+        coffee_scores = {}
+        
+        for coffee in coffees:
+            score = 0
+            for flavor in selected_flavors:
+                if flavor in coffee.com.split(','):
+                    score += 1
+            coffee_scores[coffee.co_name] = score
+
+        sorted_coffees = sorted(coffee_scores.items(), key=lambda x: x[1], reverse=True)
+        top_coffees = sorted_coffees[:3]
+        
+        coffee_images = {
+            coffee.co_name: settings.STATIC_URL + 'img/' + coffee.three_letters.lower() + '.png'
+            for coffee in coffees
+        }
+        
+        return JsonResponse({
+            'top_coffees': list(top_coffees),
+            'coffee_images': coffee_images,
+        })
+
+    return render(request, 'authtest/home.html')
+
+'''
+from django.shortcuts import render
+from .models import Coffee
+from django.http import JsonResponse
+from django.conf import settings
+
+def home(request):
+    coffees = Coffee.objects.all()
+    if request.method == 'POST':
         # フォームから送られてきたデータを取得
+        #selected_flavors = request.POST.getlist('flavor')
         selected_flavors = {
             'キャンディードシトラス': request.POST.get('candied_citrus', False),
             'スイートシトラス': request.POST.get('sweet_citrus', False),
@@ -86,7 +121,7 @@ def home(request):
     else:
         # GETリクエストの場合は空のコンテキストを渡す
         return render(request, 'authtest/home.html', {})
-
+'''
 '''
 ユーザーが好きな食事を入力
 それをデータベースCOFFEEのcom(相性のいい風味)に出てくるキーワードに分類して
@@ -114,30 +149,32 @@ team-project-2022-be4
                 home.css
             js
                 home.js
+            favicon.ico
         templates
             authtest
                 home.html
             img
-                1.png
-                2.png
-                3.png
-                4.png
-                5.png
-                6.png
-                7.png
-                8.png
-                9.png
-                10.png
-                11.png
-                12.png
-                13.png
-                14.png
-                15.png
-                16.png
-                17.png
+                bna.png
+                brk.png
+                clg.png
+                dho.png
+                edb.png
+                esp.png
+                fre.png
+                gua.png
+                hou.png
+                ita.png
+                kdr.png
+                ken.png
+                lnb.png
+                srn.png
+                sum.png
+                tyo.png
+                ver.png
         templatetags
             __init__.py
             custom_filters.py
+        __init__.py
         admin.py
         apps.py
         forms.py
@@ -146,6 +183,7 @@ team-project-2022-be4
         urls.py
        views.py
     config
+        __init__.py
         asgi.py
         setting.py
         urls.py
