@@ -13,10 +13,9 @@ body {
 }
 
 h1 {
-    color: #00704a; /* スターバックスの緑 */
+    color: #00704a;
 }
 
-/* 中央揃えのためのスタイル */
 h1, .flavor-category h2, button, .img-container, p, form {
     text-align: center;
 }
@@ -27,27 +26,25 @@ h1, .flavor-category h2, button, .img-container, p, form {
 
 .flavor-category h2 {
     margin-bottom: 10px;
-    color: #005c3c; /* 濃い緑色 */
+    color: #005c3c;
 }
 
-/* チェックボックスのラベルを左揃えにする */
 .flavor-category label {
     display: flex;
-    justify-content: flex-start; /* チェックボックスとテキストを左揃えに */
-    margin: 5px auto; /* 中央揃え */
+    justify-content: flex-start;
+    margin: 5px auto;
     width: 100%;
-    max-width: 250px; /* ラベルの最大幅を設定 */
+    max-width: 250px;
 }
 
 input[type="checkbox"] {
     margin-right: 10px;
 }
 
-/* ボタンを中央に揃える */
 button {
-    display: inline-block; /* ボタンをインラインブロック要素に */
+    display: inline-block;
     margin-top: 20px;
-    background-color: #00704a; /* スターバックスの緑 */
+    background-color: #00704a;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -55,27 +52,23 @@ button {
     font-size: 16px;
 }
 
-/* ボタンのホバー効果 */
 button:hover {
     background-color: #005c3c;
 }
 
-/* 画像コンテナ */
 .img-container {
     margin-top: 20px;
 }
 
 .img-container img {
-    max-width: 100%; /* 枠の幅に合わせて画像の幅を最大化 */
-    height: auto; /* 高さを自動調整してアスペクト比を維持 */
+    max-width: 100%;
+    height: auto;
 }
 
-/* フォームと結果コンテナを中央揃えに */
 #flavor-form, #result-container {
     text-align: center;
 }
 
-/* 'もう一度検索する' ボタンのスタイルを追加 */
 #search-again {
     margin-top: 10px;
 }

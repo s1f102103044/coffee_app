@@ -15,36 +15,33 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => response.json())
     .then(data => {
-      updateResults(data);  // 結果を更新する関数を呼び出す
+      updateResults(data);
     }).catch(error => {
       console.error('Error:', error);
     });
   });
 
-  // 「もう一度検索する」ボタンの機能を実装
   const searchAgainBtn = document.getElementById('search-again');
   searchAgainBtn.addEventListener('click', function() {
-    document.getElementById('flavor-form').reset(); // フォームをリセット
-    document.getElementById('result-container').innerHTML = ''; // 結果表示エリアをクリア
+    document.getElementById('flavor-form').reset();
+    document.getElementById('result-container').innerHTML = '';
   });
 });
 
 function updateResults(data) {
   let resultContainer = document.getElementById('result-container');
-  resultContainer.innerHTML = ''; // 既存の内容をクリア
+  resultContainer.innerHTML = '';
 
   if (data.top_coffees.length > 0) {
       data.top_coffees.forEach((coffee, index) => {
-          const ranking = index + 1; // 順位
+          const ranking = index + 1;
           const coffeeElement = document.createElement('div');
           
-          // コーヒー名と画像を表示
           coffeeElement.innerHTML = `<h3>第${ranking}位：${coffee.name}</h3>
                                      <img src="${coffee.image}" alt="${coffee.name}" style="max-width:100%; height:auto;">`;
           resultContainer.appendChild(coffeeElement);
       });
   } else {
-      // 一致するコーヒーがなかった場合のメッセージ
       resultContainer.innerHTML = '<p>該当するコーヒーが見つかりませんでした。</p>';
   }
 }
